@@ -681,7 +681,8 @@ int main(int argc, char** argv)
   // load SfMData
   sfmData::SfMData sfmDataA, sfmDataB;
 
-  if(!sfmDataIO::Load(sfmDataA, sfmDataFilenameA, sfmDataIO::ESfMData::ALL))
+  using namespace sfmDataIO;
+  if(!sfmDataIO::Load(sfmDataA, sfmDataFilenameA, ESfMData(ESfMData::VIEWS|ESfMData::EXTRINSICS|ESfMData::INTRINSICS)))
   {
     ALICEVISION_LOG_ERROR("The input SfMData file '" + sfmDataFilenameA + "' cannot be read.");
     return EXIT_FAILURE;
@@ -689,7 +690,7 @@ int main(int argc, char** argv)
 
   if(useMultiSfM)
   {
-    if(!sfmDataIO::Load(sfmDataB, sfmDataFilenameB, sfmDataIO::ESfMData::ALL))
+    if(!sfmDataIO::Load(sfmDataB, sfmDataFilenameB, ESfMData(ESfMData::VIEWS|ESfMData::EXTRINSICS|ESfMData::INTRINSICS)))
     {
       ALICEVISION_LOG_ERROR("The input SfMData file '" + sfmDataFilenameB + "' cannot be read.");
       return EXIT_FAILURE;
